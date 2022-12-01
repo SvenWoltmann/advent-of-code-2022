@@ -1,0 +1,248 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>eu.happycoders</groupId>
+  <artifactId>advent-of-code-2022</artifactId>
+  <version>1.0-SNAPSHOT</version>
+
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+
+    <!-- Versions -->
+    <junit.version>5.9.1</junit.version>
+    <assertj.version>3.23.1</assertj.version>
+    <mockito.version>4.9.0</mockito.version>
+
+    <!-- Plugin versions -->
+    <surefire-plugin.version>3.0.0-M7</surefire-plugin.version>
+    <spotless.version>2.28.0</spotless.version>
+    <google-java-format.version>1.15.0</google-java-format.version>
+    <jacoco.version>0.8.8</jacoco.version>
+    <spotbugs.version>4.7.3.0</spotbugs.version>
+    <spotbugs-annotations.version>4.7.3</spotbugs-annotations.version>
+    <findsecbugs.version>1.12.0</findsecbugs.version>
+    <pmd-plugin.version>3.19.0</pmd-plugin.version>
+    <pmd.version>6.52.0</pmd.version>
+    <checkstyle-plugin.version>3.2.0</checkstyle-plugin.version>
+    <checkstyle.version>10.5.0</checkstyle.version>
+
+    <!-- SonarCloud setup -->
+    <sonar.projectKey>SvenWoltmann_advent-of-code-2022</sonar.projectKey>
+    <sonar.organization>svenwoltmann</sonar.organization>
+    <sonar.host.url>https://sonarcloud.io</sonar.host.url>
+
+    <sonar.java.spotbugs.reportPaths>./target/spotbugsXml.xml</sonar.java.spotbugs.reportPaths>
+    <sonar.java.pmd.reportPaths>./target/pmd.xml</sonar.java.pmd.reportPaths>
+    <sonar.java.checkstyle.reportPaths>./target/checkstyle-result.xml</sonar.java.checkstyle.reportPaths>
+    <sonar.coverage.jacoco.xmlReportPaths>${project.reporting.outputDirectory}/jacoco-ut/jacoco.xml</sonar.coverage.jacoco.xmlReportPaths>
+  </properties>
+
+  <dependencies>
+    <dependency>
+      <groupId>com.github.spotbugs</groupId>
+      <artifactId>spotbugs-annotations</artifactId>
+      <version>${spotbugs-annotations.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.junit.jupiter</groupId>
+      <artifactId>junit-jupiter</artifactId>
+      <version>${junit.version}</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.assertj</groupId>
+      <artifactId>assertj-core</artifactId>
+      <version>${assertj.version}</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.mockito</groupId>
+      <artifactId>mockito-core</artifactId>
+      <version>${mockito.version}</version>
+      <scope>test</scope>
+    </dependency>
+  </dependencies>
+
+  <build>
+    <plugins>
+      <!-- Activate Java 19 preview features -->
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <configuration>
+          <source>19</source>
+          <target>19</target>
+          <compilerArgs>--enable-preview</compilerArgs>
+        </configuration>
+      </plugin>
+
+      <!-- Spotless plugin to verify code style -->
+      <plugin>
+        <groupId>com.diffplug.spotless</groupId>
+        <artifactId>spotless-maven-plugin</artifactId>
+        <version>${spotless.version}</version>
+        <configuration>
+          <java>
+            <googleJavaFormat>
+              <version>${google-java-format.version}</version>
+              <style>GOOGLE</style>
+            </googleJavaFormat>
+          </java>
+        </configuration>
+      </plugin>
+
+      <!-- Unit test runner -->
+      <plugin>
+        <artifactId>maven-surefire-plugin</artifactId>
+        <version>${surefire-plugin.version}</version>
+        <configuration>
+          <argLine>${surefireArgLine}</argLine>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
+
+  <profiles>
+    <!-- Use this profile to measure the code coverage with JaCoCo -->
+    <profile>
+      <id>test-coverage</id>
+      <build>
+        <plugins>
+          <!-- Measure code coverage with JaCoCo -->
+          <plugin>
+            <groupId>org.jacoco</groupId>
+            <artifactId>jacoco-maven-plugin</artifactId>
+            <version>${jacoco.version}</version>
+            <configuration>
+              <excludes>
+                <exclude>**/example/*</exclude>
+              </excludes>
+            </configuration>
+            <executions>
+              <execution>
+                <id>pre-unit-test</id>
+                <goals>
+                  <goal>prepare-agent</goal>
+                </goals>
+                <configuration>
+                  <destFile>${project.build.directory}/coverage-reports/jacoco-ut.exec</destFile>
+                  <propertyName>surefireArgLine</propertyName>
+                </configuration>
+              </execution>
+              <execution>
+                <id>post-unit-test</id>
+                <phase>test</phase>
+                <goals>
+                  <goal>report</goal>
+                </goals>
+                <configuration>
+                  <dataFile>${project.build.directory}/coverage-reports/jacoco-ut.exec</dataFile>
+                  <outputDirectory>${project.reporting.outputDirectory}/jacoco-ut</outputDirectory>
+                </configuration>
+              </execution>
+            </executions>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+
+    <!-- Use this profile to run a static code analysis with SpotBugs, PMD, Checkstyle -->
+    <profile>
+      <id>code-analysis</id>
+      <build>
+        <plugins>
+          <!-- Find bugs with SpotBugs -->
+          <plugin>
+            <groupId>com.github.spotbugs</groupId>
+            <artifactId>spotbugs-maven-plugin</artifactId>
+            <version>${spotbugs.version}</version>
+            <configuration>
+              <excludeFilterFile>spotbugs-exclude.xml</excludeFilterFile>
+              <plugins>
+                <plugin>
+                  <groupId>com.h3xstream.findsecbugs</groupId>
+                  <artifactId>findsecbugs-plugin</artifactId>
+                  <version>${findsecbugs.version}</version>
+                </plugin>
+              </plugins>
+            </configuration>
+            <executions>
+              <execution>
+                <goals>
+                  <goal>spotbugs</goal>
+                </goals>
+                <phase>verify</phase>
+              </execution>
+            </executions>
+          </plugin>
+
+          <!-- Find bugs with PMD -->
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-pmd-plugin</artifactId>
+            <version>${pmd-plugin.version}</version>
+            <configuration>
+              <targetJdk>19</targetJdk>
+              <rulesets>
+                <ruleset>ruleset.xml</ruleset>
+              </rulesets>
+              <excludes>
+                <exclude>**/example/*.java</exclude>
+              </excludes>
+            </configuration>
+            <dependencies>
+              <dependency>
+                <groupId>net.sourceforge.pmd</groupId>
+                <artifactId>pmd-core</artifactId>
+                <version>${pmd.version}</version>
+              </dependency>
+              <dependency>
+                <groupId>net.sourceforge.pmd</groupId>
+                <artifactId>pmd-java</artifactId>
+                <version>${pmd.version}</version>
+              </dependency>
+            </dependencies>
+            <executions>
+              <execution>
+                <goals>
+                  <goal>pmd</goal>
+                </goals>
+                <phase>verify</phase>
+              </execution>
+            </executions>
+          </plugin>
+
+          <!-- Validate code style with Checkstyle -->
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-checkstyle-plugin</artifactId>
+            <version>${checkstyle-plugin.version}</version>
+            <configuration>
+              <configLocation>${project.basedir}/google_checks.xml</configLocation>
+              <suppressionsLocation>${project.basedir}/checkstyle-suppressions.xml</suppressionsLocation>
+            </configuration>
+            <dependencies>
+              <dependency>
+                <groupId>com.puppycrawl.tools</groupId>
+                <artifactId>checkstyle</artifactId>
+                <version>${checkstyle.version}</version>
+              </dependency>
+            </dependencies>
+            <executions>
+              <execution>
+                <goals>
+                  <goal>checkstyle</goal>
+                </goals>
+                <phase>verify</phase>
+              </execution>
+            </executions>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+  </profiles>
+
+</project>
