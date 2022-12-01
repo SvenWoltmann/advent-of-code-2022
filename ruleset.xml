@@ -7,10 +7,32 @@
 
   <description>PMD ruleset for HappyCoders.eu</description>
 
-  <rule ref="category/java/bestpractices.xml"/>
-  <rule ref="category/java/codestyle.xml"/>
-  <rule ref="category/java/design.xml"/>
-  <rule ref="category/java/documentation.xml"/>
+  <rule ref="category/java/bestpractices.xml">
+    <exclude name="SystemPrintln"/>                     <!-- While this rule makes sense for most applications, here we just sometimes want to print things. -->
+  </rule>
+
+  <rule ref="category/java/codestyle.xml">
+    <exclude name="CommentDefaultAccessModifier"/>      <!-- We don't comment why we make fields private, protected or public. So why should we comment on default access? -->
+    <exclude name="LocalVariableCouldBeFinal"/>         <!-- Using 'final' on local variables (in contrast to fields) has no effect on the compiler; IMO it's noise. -->
+    <exclude name="MethodArgumentCouldBeFinal"/>        <!-- Using 'final' on method arguments (in contrast to fields) has no effect on the compiler; IMO it's noise. -->
+  </rule>
+
+  <rule ref="category/java/design.xml">
+    <exclude name="LawOfDemeter"/>                      <!-- That rule also forbids fluent programming style. -->
+    <exclude name="UseUtilityClass"/>                   <!-- Usually, this is a good rule; in this project however, I would consider this noise. -->
+  </rule>
+
+  <!-- Ignore class length checks for puzzle inputs -->
+  <rule ref="category/java/design.xml/ExcessiveClassLength">
+    <properties>
+      <property name="violationSuppressXPath" value="//ClassOrInterfaceDeclaration['Main*.java']"/>
+    </properties>
+  </rule>
+
+  <rule ref="category/java/documentation.xml">
+    <exclude name="CommentRequired"/>                   <!-- Would require comments on all fields, public methods, and constructors. Good names are a much better documentation. -->
+  </rule>
+
   <rule ref="category/java/errorprone.xml"/>
   <rule ref="category/java/multithreading.xml"/>
   <rule ref="category/java/performance.xml"/>
