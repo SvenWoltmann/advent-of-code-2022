@@ -15,6 +15,14 @@
     <exclude name="CommentDefaultAccessModifier"/>      <!-- We don't comment why we make fields private, protected or public. So why should we comment on default access? -->
     <exclude name="LocalVariableCouldBeFinal"/>         <!-- Using 'final' on local variables (in contrast to fields) has no effect on the compiler; IMO it's noise. -->
     <exclude name="MethodArgumentCouldBeFinal"/>        <!-- Using 'final' on method arguments (in contrast to fields) has no effect on the compiler; IMO it's noise. -->
+    <exclude name="OnlyOneReturn"/>                     <!-- IMO not a good rule as it would make some methods more complicated than necessary. -->
+    <exclude name="ShortMethodName"/>                   <!-- Wouldn't allow method names like "of". -->
+  </rule>
+
+  <rule ref="category/java/codestyle.xml/LongVariable">
+    <properties>
+      <property name="minimum" value="65" />            <!-- Default max is 16, which is not always enough for a descriptive name; allow longer variables. -->
+    </properties>
   </rule>
 
   <rule ref="category/java/design.xml">
@@ -33,7 +41,10 @@
     <exclude name="CommentRequired"/>                   <!-- Would require comments on all fields, public methods, and constructors. Good names are a much better documentation. -->
   </rule>
 
-  <rule ref="category/java/errorprone.xml"/>
+  <rule ref="category/java/errorprone.xml">
+    <exclude name="AvoidFieldNameMatchingMethodName"/>  <!-- I personally like using the field name also as an accessor name for final fields (like in Java records). -->
+  </rule>
+
   <rule ref="category/java/multithreading.xml"/>
   <rule ref="category/java/performance.xml"/>
   <rule ref="category/java/security.xml"/>
