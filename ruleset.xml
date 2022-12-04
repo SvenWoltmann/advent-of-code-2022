@@ -39,6 +39,7 @@
 
   <rule ref="category/java/documentation.xml">
     <exclude name="CommentRequired"/>                   <!-- Would require comments on all fields, public methods, and constructors. Good names are a much better documentation. -->
+    <exclude name="CommentSize"/>                       <!-- Don't limit the size of comments. -->
   </rule>
 
   <rule ref="category/java/errorprone.xml">
