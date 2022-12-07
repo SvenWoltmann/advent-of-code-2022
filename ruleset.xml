@@ -20,6 +20,7 @@
     <exclude name="LocalVariableCouldBeFinal"/>         <!-- Using 'final' on local variables (in contrast to fields) has no effect on the compiler; IMO it's noise. -->
     <exclude name="MethodArgumentCouldBeFinal"/>        <!-- Using 'final' on method arguments (in contrast to fields) has no effect on the compiler; IMO it's noise. -->
     <exclude name="OnlyOneReturn"/>                     <!-- IMO not a good rule as it would make some methods more complicated than necessary. -->
+    <exclude name="ShortClassName"/>                    <!-- Wouldn't allow class names like "File" -->
     <exclude name="ShortMethodName"/>                   <!-- Wouldn't allow method names like "of". -->
   </rule>
 
