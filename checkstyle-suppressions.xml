@@ -5,4 +5,6 @@
     "http://www.puppycrawl.com/dtds/suppressions_1_1.dtd">
 
 <suppressions>
+  <!-- The Main classes contain the puzzle input which is sometimes wider than 100 characters. -->
+  <suppress files="Main.*\.java" checks="LineLengthCheck"/>
 </suppressions>
