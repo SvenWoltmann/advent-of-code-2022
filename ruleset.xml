@@ -24,6 +24,12 @@
     <exclude name="ShortMethodName"/>                   <!-- Wouldn't allow method names like "of". -->
   </rule>
 
+  <rule ref="category/java/codestyle.xml/ShortVariable">
+    <properties>
+      <property name="minimum" value="2" />             <!-- Default min is 3, but that wouldn't allow a variable name like "id". -->
+    </properties>
+  </rule>
+
   <rule ref="category/java/codestyle.xml/LongVariable">
     <properties>
       <property name="minimum" value="65" />            <!-- Default max is 16, which is not always enough for a descriptive name; allow longer variables. -->
