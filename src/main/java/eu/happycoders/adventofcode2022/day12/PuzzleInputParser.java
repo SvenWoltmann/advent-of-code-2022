@@ -8,6 +8,10 @@ package eu.happycoders.adventofcode2022.day12;
  * @author <a href="mailto:sven@happycoders.eu">Sven Woltmann</a>
  */
 class PuzzleInputParser {
+
+  private static final char START_MARK = 'S';
+  private static final char END_MARK = 'E';
+
   static PuzzleInput parse(String input) {
     String[] lines = input.split("\\n");
 
@@ -19,15 +23,15 @@ class PuzzleInputParser {
     for (int y = 0; y < size.height(); y++) {
       String line = lines[y];
       for (int x = 0; x < size.width(); x++) {
-        char c = line.charAt(x);
-        if (c == 'S') {
+        char mark = line.charAt(x);
+        if (mark == START_MARK) {
           start = new Position(x, y);
-          c = 'a';
-        } else if (c == 'E') {
+          mark = HeightMap.MIN_HEIGHT;
+        } else if (mark == END_MARK) {
           end = new Position(x, y);
-          c = 'z';
+          mark = HeightMap.MAX_HEIGHT;
         }
-        map.setHeight(new Position(x, y), c);
+        map.setHeight(new Position(x, y), mark);
       }
     }
 

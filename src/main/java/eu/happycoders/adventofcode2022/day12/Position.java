@@ -7,6 +7,7 @@ package eu.happycoders.adventofcode2022.day12;
  *
  * @author <a href="mailto:sven@happycoders.eu">Sven Woltmann</a>
  */
+@SuppressWarnings("PMD.ShortVariable") // x and y are OK!
 record Position(int x, int y) {
   Position top() {
     return new Position(x, y - 1);

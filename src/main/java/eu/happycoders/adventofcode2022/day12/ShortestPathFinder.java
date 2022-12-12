@@ -2,6 +2,7 @@ package eu.happycoders.adventofcode2022.day12;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 /**
  * Advent of Code 2022 – Object-Oriented Solutions in Java.
@@ -30,7 +31,7 @@ class ShortestPathFinder {
     this.steps = new int[size.height()][size.width()];
   }
 
-  int getLengthOfShortestPath() {
+  Optional<Integer> getLengthOfShortestPath() {
     List<Position> positions = List.of(start);
     List<Position> newPositions = new ArrayList<>();
 
@@ -46,7 +47,7 @@ class ShortestPathFinder {
       }
 
       if (newPositions.isEmpty()) {
-        throw new IllegalStateException("No path found");
+        return Optional.empty();
       }
 
       if (newPositions.contains(end)) {
@@ -57,7 +58,7 @@ class ShortestPathFinder {
       newPositions = new ArrayList<>();
     }
 
-    return stepNo;
+    return Optional.of(stepNo);
   }
 
   private void tryGoTo(Position target, int sourceHeight, int stepNo, List<Position> newPositions) {

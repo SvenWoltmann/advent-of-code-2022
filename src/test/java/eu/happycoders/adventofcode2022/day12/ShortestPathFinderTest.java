@@ -10,7 +10,8 @@ class ShortestPathFinderTest {
   void givenTheTestHeightMapAndStartAndEndPoints_getLengthOfShortestPath_returns31() {
     int shortestPathLength =
         new ShortestPathFinder(TestInputs.HEIGHT_MAP, TestInputs.START, TestInputs.END)
-            .getLengthOfShortestPath();
+            .getLengthOfShortestPath()
+            .orElseThrow();
 
     assertThat(shortestPathLength).isEqualTo(31);
   }

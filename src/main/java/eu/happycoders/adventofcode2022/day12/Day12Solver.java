@@ -1,6 +1,7 @@
 package eu.happycoders.adventofcode2022.day12;
 
 import java.util.List;
+import java.util.Optional;
 
 /**
  * Advent of Code 2022 – Object-Oriented Solutions in Java.
@@ -15,7 +16,8 @@ class Day12Solver {
     PuzzleInput input = PuzzleInputParser.parse(inputString);
 
     return new ShortestPathFinder(input.map(), input.start(), input.end())
-        .getLengthOfShortestPath();
+        .getLengthOfShortestPath()
+        .orElseThrow();
   }
 
   static int getLengthOfShortestPathLengthFromAnyStartingPoint(String inputString) {
@@ -25,14 +27,10 @@ class Day12Solver {
 
     int shortestShortestPath = Integer.MAX_VALUE;
     for (Position start : starts) {
-      try {
-        int shortestPath =
-            new ShortestPathFinder(input.map(), start, input.end()).getLengthOfShortestPath();
-        if (shortestPath < shortestShortestPath) {
-          shortestShortestPath = shortestPath;
-        }
-      } catch (IllegalStateException e) {
-        // Ignore if no shortest path found from start
+      Optional<Integer> shortestPath =
+          new ShortestPathFinder(input.map(), start, input.end()).getLengthOfShortestPath();
+      if (shortestPath.isPresent() && shortestPath.get() < shortestShortestPath) {
+        shortestShortestPath = shortestPath.get();
       }
     }
 
