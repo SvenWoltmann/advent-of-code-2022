@@ -8,8 +8,10 @@
   <description>PMD ruleset for HappyCoders.eu</description>
 
   <rule ref="category/java/bestpractices.xml">
+    <exclude name="ArrayIsStoredDirectly"/>             <!-- This is usually a good rule as robustness is more important than performance. In Advent of Code, it's the other way round :-) -->
     <exclude name="AvoidReassigningParameters"/>        <!-- IMO, that's OK if you do it right at the beginning of a method, e.g., to trim a String parameter. -->
     <exclude name="LiteralsFirstInComparisons"/>        <!-- IMO, that's OK if you know that the variable is not null. -->
+    <exclude name="MethodReturnsInternalArray"/>        <!-- This is usually a good rule as robustness is more important than performance. In Advent of Code, it's the other way round :-) -->
     <exclude name="SystemPrintln"/>                     <!-- While this rule makes sense for most applications, here we just sometimes want to print things. -->
     <exclude name="UseVarargs"/>                        <!-- PMD suggests this where it doesn't make sense, meaning where I always pass in an existing array. -->
   </rule>
