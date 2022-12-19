@@ -73,6 +73,7 @@
 
   <rule ref="category/java/performance.xml">
     <exclude name="AvoidInstantiatingObjectsInLoops"/>  <!-- Rule makes sense only sometimes. -->
+    <exclude name="InsufficientStringBufferDeclaration"/><!-- I consider this premature optimization. -->
   </rule>
 
   <rule ref="category/java/security.xml"/>
