@@ -32,6 +32,12 @@
     </properties>
   </rule>
 
+  <rule ref="category/java/codestyle.xml/TooManyStaticImports">
+    <properties>
+      <property name="maximumStaticImports" value="10" /><!-- Default is 4, which is too low IMO. -->
+    </properties>
+  </rule>
+
   <rule ref="category/java/codestyle.xml/LongVariable">
     <properties>
       <property name="minimum" value="65" />            <!-- Default max is 16, which is not always enough for a descriptive name; allow longer variables. -->
