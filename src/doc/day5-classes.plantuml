@@ -1,0 +1,14 @@
+@startuml
+
+interface CrateMover{
+  {method} move(stacks : CrateStacks, move : Move)
+}
+
+class CrateMover9000 implements CrateMover {
+  {method} move(stacks : CrateStacks, move : Move)
+}
+class CrateMover9001 implements CrateMover {
+  {method} move(stacks : CrateStacks, move : Move)
+}
+
+@enduml

@@ -1,0 +1,26 @@
+@startuml
+
+interface DirectoryEntry{
+  {method} getName() : String
+}
+
+class Directory implements DirectoryEntry {
+  {field} name : String
+  {field} parent : Directory
+  {field} entries : List<DirectoryEntry>
+  {method} add(entry : DirectoryEntry)
+  {method} getParent() : Directory
+  {method} findDirectory(name : String) : Directory
+  {method} listWithAllSubDirectories() : List<Directory>
+  {method} totalSize() : long
+}
+
+class File implements DirectoryEntry {
+  {field} name : String
+  {field} size : long
+  {method} getSize() : long
+}
+
+DirectoryEntry "*" <-- Directory
+
+@enduml
