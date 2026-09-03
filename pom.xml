@@ -13,7 +13,7 @@
 
     <!-- Versions -->
     <junit.version>5.9.1</junit.version>
-    <assertj.version>3.23.1</assertj.version>
+    <assertj.version>3.27.7</assertj.version>
     <mockito.version>4.9.0</mockito.version>
 
     <!-- Plugin versions -->
