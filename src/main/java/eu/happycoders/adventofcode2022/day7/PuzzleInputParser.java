@@ -9,15 +9,12 @@ package eu.happycoders.adventofcode2022.day7;
  */
 class PuzzleInputParser {
 
-  private Directory root;
+  private final Directory root = new Directory("/", null);
   private Directory currentDir;
   private ParserState state = ParserState.INPUT;
 
   Directory parse(String input) {
     input.lines().forEach(this::process);
-    if (root == null) {
-      throw new IllegalArgumentException("Puzzle input does not start with '$ cd /'");
-    }
     return root;
   }
 
@@ -44,7 +41,7 @@ class PuzzleInputParser {
       if (!dir.equals("/")) {
         throw new IllegalArgumentException("First cd command must be to '/'");
       }
-      currentDir = root = new Directory("/", null);
+      currentDir = root;
     } else if (dir.equals("..")) {
       Directory parent = currentDir.getParent();
       if (parent == null) {
