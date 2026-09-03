@@ -36,7 +36,8 @@ class Day2SolverTest {
 
   @Test
   void givenTestInputForThreeRounds_calculateScoreWithGuessedMeaning_returns15() {
-    String testInput = """
+    String testInput =
+        """
               A Y
               B X
               C Z""";
@@ -74,7 +75,8 @@ class Day2SolverTest {
 
   @Test
   void givenTestInputForThreeRounds_calculateScoreWithCorrectMeaning_returns12() {
-    String testInput = """
+    String testInput =
+        """
               A Y
               B X
               C Z""";

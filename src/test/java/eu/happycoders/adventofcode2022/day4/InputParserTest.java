@@ -21,7 +21,8 @@ class InputParserTest {
   @Test
   void
       givenAMultiLineTestInput_parseListOfSectionAssignmentPairs_returnsTheListOfSectionAssignmentPairs() {
-    String testInput = """
+    String testInput =
+        """
             2-4,6-8
             2-3,4-5""";
 

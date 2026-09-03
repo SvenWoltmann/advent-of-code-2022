@@ -44,17 +44,17 @@ class JobsParser {
       String operand2MonkeyName = matcher.group(4);
 
       return switch (operationSymbol) {
-        case "+" -> new MathOperationJobAddition(
-            monkeyName, operand1MonkeyName, operand2MonkeyName);
+        case "+" ->
+            new MathOperationJobAddition(monkeyName, operand1MonkeyName, operand2MonkeyName);
 
-        case "-" -> new MathOperationJobSubtraction(
-            monkeyName, operand1MonkeyName, operand2MonkeyName);
+        case "-" ->
+            new MathOperationJobSubtraction(monkeyName, operand1MonkeyName, operand2MonkeyName);
 
-        case "*" -> new MathOperationJobMultiplication(
-            monkeyName, operand1MonkeyName, operand2MonkeyName);
+        case "*" ->
+            new MathOperationJobMultiplication(monkeyName, operand1MonkeyName, operand2MonkeyName);
 
-        case "/" -> new MathOperationJobDivision(
-            monkeyName, operand1MonkeyName, operand2MonkeyName);
+        case "/" ->
+            new MathOperationJobDivision(monkeyName, operand1MonkeyName, operand2MonkeyName);
 
         default -> throw new IllegalStateException("Unknown symbol: " + operationSymbol);
       };

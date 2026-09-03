@@ -48,7 +48,8 @@ class PuzzleInputParserTest {
 
   @Test
   void givenChangeDirToParentFromRoot_process_throwsAnException() {
-    String commands = """
+    String commands =
+        """
             $ cd /
             $ cd ..""";
 
@@ -61,7 +62,8 @@ class PuzzleInputParserTest {
 
   @Test
   void givenChangeDirToUnknownDirectory_process_throwsAnException() {
-    String commands = """
+    String commands =
+        """
             $ cd /
             $ cd foo""";
 
@@ -74,7 +76,8 @@ class PuzzleInputParserTest {
 
   @Test
   void givenListOutputWithoutListCommand_process_throwsAnException() {
-    String commands = """
+    String commands =
+        """
             $ cd /
             14848514 b.txt""";
 
@@ -87,7 +90,8 @@ class PuzzleInputParserTest {
 
   @Test
   void givenUnexpectedListOutput_process_throwsAnException() {
-    String commands = """
+    String commands =
+        """
             $ cd /
             $ ls
             unexpected""";

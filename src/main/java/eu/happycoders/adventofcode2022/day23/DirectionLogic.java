@@ -46,8 +46,8 @@ public class DirectionLogic {
       case SOUTH -> S_SE_SW;
       case WEST -> W_NW_SW;
       case EAST -> E_NE_SE;
-      default -> throw new IllegalArgumentException(
-          "Invalid direction for this step: " + direction);
+      default ->
+          throw new IllegalArgumentException("Invalid direction for this step: " + direction);
     };
   }
 }

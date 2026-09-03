@@ -9,7 +9,8 @@ class OperationsParserTest {
 
   @Test
   void givenInput_parse_returnsListOfOperations() {
-    String input = """
+    String input =
+        """
             noop
             addx 3
             addx -5""";
