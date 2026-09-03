@@ -15,6 +15,9 @@ class PuzzleInputParser {
 
   Directory parse(String input) {
     input.lines().forEach(this::process);
+    if (root == null) {
+      throw new IllegalArgumentException("Puzzle input does not start with '$ cd /'");
+    }
     return root;
   }
 
