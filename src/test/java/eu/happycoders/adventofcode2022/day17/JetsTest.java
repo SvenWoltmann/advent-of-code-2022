@@ -8,50 +8,14 @@ import org.junit.jupiter.api.Test;
 class JetsTest {
 
   @Test
-  void givenJetsWithTestInput_next_returnsTheDirectionOfTheNextJet() {
+  void givenJetsWithTestInput_next_returnsTheInputDirectionsAndWrapsAround() {
     Jets jets = new Jets(TEST_INPUT);
 
-    for (int i = 0; i < 5; i++) {
-      assertThat(jets.next()).isEqualTo(Direction.RIGHT);
-      assertThat(jets.next()).isEqualTo(Direction.RIGHT);
-      assertThat(jets.next()).isEqualTo(Direction.RIGHT);
-      assertThat(jets.next()).isEqualTo(Direction.LEFT);
-      assertThat(jets.next()).isEqualTo(Direction.LEFT);
-      assertThat(jets.next()).isEqualTo(Direction.RIGHT);
-      assertThat(jets.next()).isEqualTo(Direction.LEFT);
-      assertThat(jets.next()).isEqualTo(Direction.RIGHT);
-      assertThat(jets.next()).isEqualTo(Direction.RIGHT);
-      assertThat(jets.next()).isEqualTo(Direction.LEFT);
-      assertThat(jets.next()).isEqualTo(Direction.LEFT);
-      assertThat(jets.next()).isEqualTo(Direction.LEFT);
-      assertThat(jets.next()).isEqualTo(Direction.RIGHT);
-      assertThat(jets.next()).isEqualTo(Direction.RIGHT);
-      assertThat(jets.next()).isEqualTo(Direction.LEFT);
-      assertThat(jets.next()).isEqualTo(Direction.RIGHT);
-      assertThat(jets.next()).isEqualTo(Direction.RIGHT);
-      assertThat(jets.next()).isEqualTo(Direction.RIGHT);
-      assertThat(jets.next()).isEqualTo(Direction.LEFT);
-      assertThat(jets.next()).isEqualTo(Direction.LEFT);
-      assertThat(jets.next()).isEqualTo(Direction.LEFT);
-      assertThat(jets.next()).isEqualTo(Direction.RIGHT);
-      assertThat(jets.next()).isEqualTo(Direction.RIGHT);
-      assertThat(jets.next()).isEqualTo(Direction.RIGHT);
-      assertThat(jets.next()).isEqualTo(Direction.LEFT);
-      assertThat(jets.next()).isEqualTo(Direction.LEFT);
-      assertThat(jets.next()).isEqualTo(Direction.LEFT);
-      assertThat(jets.next()).isEqualTo(Direction.RIGHT);
-      assertThat(jets.next()).isEqualTo(Direction.LEFT);
-      assertThat(jets.next()).isEqualTo(Direction.LEFT);
-      assertThat(jets.next()).isEqualTo(Direction.LEFT);
-      assertThat(jets.next()).isEqualTo(Direction.RIGHT);
-      assertThat(jets.next()).isEqualTo(Direction.RIGHT);
-      assertThat(jets.next()).isEqualTo(Direction.LEFT);
-      assertThat(jets.next()).isEqualTo(Direction.RIGHT);
-      assertThat(jets.next()).isEqualTo(Direction.RIGHT);
-      assertThat(jets.next()).isEqualTo(Direction.LEFT);
-      assertThat(jets.next()).isEqualTo(Direction.LEFT);
-      assertThat(jets.next()).isEqualTo(Direction.RIGHT);
-      assertThat(jets.next()).isEqualTo(Direction.RIGHT);
+    StringBuilder directions = new StringBuilder();
+    for (int i = 0; i < 5 * TEST_INPUT.length(); i++) {
+      directions.append(jets.next() == Direction.RIGHT ? '>' : '<');
     }
+
+    assertThat(directions.toString()).isEqualTo(TEST_INPUT.repeat(5));
   }
 }

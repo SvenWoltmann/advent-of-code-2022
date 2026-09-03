@@ -26,11 +26,17 @@
     <sonar.projectKey>SvenWoltmann_advent-of-code-2022</sonar.projectKey>
     <sonar.organization>svenwoltmann</sonar.organization>
     <sonar.host.url>https://sonarcloud.io</sonar.host.url>
+    <!-- Its test names document which malformed input the parser rejects and why; a parameterized test would hide that. -->
+    <sonar.issue.ignore.multicriteria.e4.ruleKey>java:S5976</sonar.issue.ignore.multicriteria.e4.ruleKey>
+    <sonar.issue.ignore.multicriteria.e4.resourceKey>**/day7/PuzzleInputParserTest.java</sonar.issue.ignore.multicriteria.e4.resourceKey>
+    <!-- Its test names describe the merge scenarios (touching, covering, extending); a parameterized test would reduce them to number tuples. -->
+    <sonar.issue.ignore.multicriteria.e3.ruleKey>java:S5976</sonar.issue.ignore.multicriteria.e3.ruleKey>
+    <sonar.issue.ignore.multicriteria.e3.resourceKey>**/day15/RangesTest.java</sonar.issue.ignore.multicriteria.e3.resourceKey>
     <!-- The puzzle input parsers and helpers are static by design; a private constructor in 52 classes adds nothing. -->
     <sonar.issue.ignore.multicriteria.e2.ruleKey>java:S1118</sonar.issue.ignore.multicriteria.e2.ruleKey>
     <sonar.issue.ignore.multicriteria.e2.resourceKey>**/*.java</sonar.issue.ignore.multicriteria.e2.resourceKey>
 
-    <sonar.issue.ignore.multicriteria>e1,e2</sonar.issue.ignore.multicriteria>
+    <sonar.issue.ignore.multicriteria>e1,e2,e3,e4</sonar.issue.ignore.multicriteria>
     <!-- Puzzle solutions and demos print their results; System.out is the program's output, not logging. -->
     <sonar.issue.ignore.multicriteria.e1.ruleKey>java:S106</sonar.issue.ignore.multicriteria.e1.ruleKey>
     <sonar.issue.ignore.multicriteria.e1.resourceKey>**/*.java</sonar.issue.ignore.multicriteria.e1.resourceKey>
