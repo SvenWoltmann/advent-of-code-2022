@@ -7,7 +7,7 @@ package eu.happycoders.adventofcode2022.day8;
  *
  * @author <a href="mailto:sven@happycoders.eu">Sven Woltmann</a>
  */
-public enum Direction {
+enum Direction {
   TOP,
   RIGHT,
   BOTTOM,
