@@ -16,6 +16,6 @@ class JetsTest {
       directions.append(jets.next() == Direction.RIGHT ? '>' : '<');
     }
 
-    assertThat(directions.toString()).isEqualTo(TEST_INPUT.repeat(5));
+    assertThat(directions).hasToString(TEST_INPUT.repeat(5));
   }
 }
