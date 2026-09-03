@@ -26,6 +26,14 @@
     <sonar.projectKey>SvenWoltmann_advent-of-code-2022</sonar.projectKey>
     <sonar.organization>svenwoltmann</sonar.organization>
     <sonar.host.url>https://sonarcloud.io</sonar.host.url>
+    <!-- The puzzle input parsers and helpers are static by design; a private constructor in 52 classes adds nothing. -->
+    <sonar.issue.ignore.multicriteria.e2.ruleKey>java:S1118</sonar.issue.ignore.multicriteria.e2.ruleKey>
+    <sonar.issue.ignore.multicriteria.e2.resourceKey>**/*.java</sonar.issue.ignore.multicriteria.e2.resourceKey>
+
+    <sonar.issue.ignore.multicriteria>e1,e2</sonar.issue.ignore.multicriteria>
+    <!-- Puzzle solutions and demos print their results; System.out is the program's output, not logging. -->
+    <sonar.issue.ignore.multicriteria.e1.ruleKey>java:S106</sonar.issue.ignore.multicriteria.e1.ruleKey>
+    <sonar.issue.ignore.multicriteria.e1.resourceKey>**/*.java</sonar.issue.ignore.multicriteria.e1.resourceKey>
 
     <sonar.coverage.jacoco.xmlReportPaths>${project.reporting.outputDirectory}/jacoco-ut/jacoco.xml</sonar.coverage.jacoco.xmlReportPaths>
     <sonar.coverage.exclusions>**/Main*.java</sonar.coverage.exclusions>
