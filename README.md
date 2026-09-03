@@ -12,7 +12,7 @@ I therefore took the trouble to implement each task in a truly object-oriented a
 
 For explanations of my solutions, see my [Advent of Code 2022 Solutions](https://www.happycoders.eu/algorithms/advent-of-code-2022/) article.
 
-This project uses [Java 19 features](https://www.happycoders.eu/java/java-19-features/), including preview features, so most classes must be compiled and run with [Java 19](https://jdk.java.net/19/) and the `--enable-preview` flag.
+This project uses [Java 19 features](https://www.happycoders.eu/java/java-19-features/) such as record patterns and pattern matching for switch. They were preview features in Java 19 and are final since Java 21, so the project is compiled with Java 21 and no longer needs the `--enable-preview` flag.
 
 
 ## <br>Java Versions PDF Cheat Sheet

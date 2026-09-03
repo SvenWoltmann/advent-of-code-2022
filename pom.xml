@@ -20,7 +20,7 @@
     <surefire-plugin.version>3.0.0-M7</surefire-plugin.version>
     <spotless.version>2.28.0</spotless.version>
     <google-java-format.version>1.15.0</google-java-format.version>
-    <jacoco.version>0.8.8</jacoco.version>
+    <jacoco.version>0.8.15</jacoco.version>
     <spotbugs.version>4.7.3.0</spotbugs.version>
     <spotbugs-annotations.version>4.7.3</spotbugs-annotations.version>
     <findsecbugs.version>1.12.0</findsecbugs.version>
@@ -69,14 +69,12 @@
 
   <build>
     <plugins>
-      <!-- Activate Java 19 preview features -->
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-compiler-plugin</artifactId>
         <configuration>
-          <source>19</source>
-          <target>19</target>
-          <compilerArgs>--enable-preview</compilerArgs>
+          <source>21</source>
+          <target>21</target>
         </configuration>
       </plugin>
 
@@ -100,7 +98,7 @@
         <artifactId>maven-surefire-plugin</artifactId>
         <version>${surefire-plugin.version}</version>
         <configuration>
-          <argLine>--enable-preview ${surefireArgLine}</argLine>
+          <argLine>${surefireArgLine}</argLine>
         </configuration>
       </plugin>
     </plugins>
