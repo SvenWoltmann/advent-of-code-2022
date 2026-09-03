@@ -116,20 +116,23 @@ class ValleyMap {
     boolean isRightBlizzard = isRightBlizzardAtMinute(position, minute);
 
     int count = countBlizzards(isUpBlizzard, isDownBlizzard, isLeftBlizzard, isRightBlizzard);
-    if (count == 0) {
-      return Tile.CLEAR_GROUND.symbol();
-    } else if (count == 1) {
-      if (isUpBlizzard) {
-        return Tile.UP.symbol();
-      } else if (isDownBlizzard) {
-        return Tile.DOWN.symbol();
-      } else if (isLeftBlizzard) {
-        return Tile.LEFT.symbol();
-      } else {
-        return Tile.RIGHT.symbol();
-      }
+    return switch (count) {
+      case 0 -> Tile.CLEAR_GROUND.symbol();
+      case 1 -> singleBlizzardSymbol(isUpBlizzard, isDownBlizzard, isLeftBlizzard);
+      default -> (char) ('0' + count);
+    };
+  }
+
+  private static char singleBlizzardSymbol(
+      boolean isUpBlizzard, boolean isDownBlizzard, boolean isLeftBlizzard) {
+    if (isUpBlizzard) {
+      return Tile.UP.symbol();
+    } else if (isDownBlizzard) {
+      return Tile.DOWN.symbol();
+    } else if (isLeftBlizzard) {
+      return Tile.LEFT.symbol();
     } else {
-      return (char) ('0' + count);
+      return Tile.RIGHT.symbol();
     }
   }
 

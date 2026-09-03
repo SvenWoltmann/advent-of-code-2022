@@ -173,9 +173,9 @@ class ActionsSimulator {
     }
 
     // Don't let both open the same valve
-    if (action1 instanceof OpenAction openAction1
-        && action2 instanceof OpenAction openAction2
-        && openAction1.valve() == openAction2.valve()) {
+    if (action1 instanceof OpenAction(Valve valve1)
+        && action2 instanceof OpenAction(Valve valve2)
+        && valve1 == valve2) {
       return;
     }
 
@@ -189,25 +189,25 @@ class ActionsSimulator {
   }
 
   private void executeOpenActions(Action action1, Action action2) {
-    if (action1 instanceof OpenAction openAction) {
-      openAction.valve().open();
+    if (action1 instanceof OpenAction(Valve valve)) {
+      valve.open();
       valves.invalidateAllClosedValvesSortedByFlowRate();
     }
 
-    if (action2 instanceof OpenAction openAction) {
-      openAction.valve().open();
+    if (action2 instanceof OpenAction(Valve valve)) {
+      valve.open();
       valves.invalidateAllClosedValvesSortedByFlowRate();
     }
   }
 
   private void undoOpenActions(Action action1, Action action2) {
-    if (action1 instanceof OpenAction openAction) {
-      openAction.valve().close();
+    if (action1 instanceof OpenAction(Valve valve)) {
+      valve.close();
       valves.invalidateAllClosedValvesSortedByFlowRate();
     }
 
-    if (action2 instanceof OpenAction openAction) {
-      openAction.valve().close();
+    if (action2 instanceof OpenAction(Valve valve)) {
+      valve.close();
       valves.invalidateAllClosedValvesSortedByFlowRate();
     }
   }

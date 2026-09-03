@@ -19,11 +19,11 @@ public class MonkeysParser {
 
   private static final Pattern MONKEY_PATTERN =
       Pattern.compile(
-          "Monkey (\\d+):\\s+"
-              + "Starting items: (.+)\\s+"
-              + "Operation: new = (.+)\\s+"
-              + "Test: divisible by (\\d+)\\s+"
-              + "If true: throw to monkey (.+)\\s+"
+          "Monkey (\\d+):\\n\\s*"
+              + "Starting items: (.+)\\n\\s*"
+              + "Operation: new = (.+)\\n\\s*"
+              + "Test: divisible by (\\d+)\\n\\s*"
+              + "If true: throw to monkey (.+)\\n\\s*"
               + "If false: throw to monkey (.+)");
 
   static List<Monkey> parse(String input) {

@@ -75,17 +75,17 @@ final class PacketListComparator implements Comparator<PacketList> {
 
   @SuppressWarnings("PMD.CyclomaticComplexity") // This method isn't particularly complex
   private int comparePackets(int level, Packet value1, Packet value2) {
-    if (value1 instanceof PacketInteger i1 && value2 instanceof PacketInteger i2) {
-      return compareIntegers(i1, i2, level);
-    } else if (value1 instanceof PacketList l1 && value2 instanceof PacketList l2) {
-      return compareLists(l1, l2, level + 1);
-    } else if (value1 instanceof PacketList l1 && value2 instanceof PacketInteger i2) {
-      return compareLists(l1, new PacketList(i2.value()), level + 1);
-    } else if (value1 instanceof PacketInteger i1 && value2 instanceof PacketList l2) {
-      return compareLists(new PacketList(i1.value()), l2, level + 1);
-    } else {
-      throw new IllegalStateException("Don't know how to compare " + value1 + " and " + value2);
-    }
+    return switch (value1) {
+      case PacketInteger i1 when value2 instanceof PacketInteger i2 ->
+          compareIntegers(i1, i2, level);
+      case PacketList l1 when value2 instanceof PacketList l2 -> compareLists(l1, l2, level + 1);
+      case PacketList l1 when value2 instanceof PacketInteger(int value2AsInt) ->
+          compareLists(l1, new PacketList(value2AsInt), level + 1);
+      case PacketInteger(int value1AsInt) when value2 instanceof PacketList l2 ->
+          compareLists(new PacketList(value1AsInt), l2, level + 1);
+      default ->
+          throw new IllegalStateException("Don't know how to compare " + value1 + " and " + value2);
+    };
   }
 
   private int compareIntegers(PacketInteger i1, PacketInteger i2, int indentationLevel) {

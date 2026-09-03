@@ -106,11 +106,11 @@ class Chamber {
       return;
     }
 
-    TowerHeightAndNumberOfRocks found = patterns.get(pattern);
-
     // First pattern found? Store and return.
+    TowerHeightAndNumberOfRocks found =
+        patterns.putIfAbsent(
+            pattern, new TowerHeightAndNumberOfRocks(getTowerHeight(), numberOfRocks));
     if (found == null) {
-      patterns.put(pattern, new TowerHeightAndNumberOfRocks(getTowerHeight(), numberOfRocks));
       return;
     }
 

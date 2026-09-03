@@ -26,12 +26,12 @@ class Actions {
 
     pressureReleased += flowRate;
 
-    if (action1 instanceof OpenAction openAction) {
-      openValve(openAction.valve());
+    if (action1 instanceof OpenAction(Valve valve)) {
+      openValve(valve);
     }
 
-    if (action2 instanceof OpenAction openAction) {
-      openValve(openAction.valve());
+    if (action2 instanceof OpenAction(Valve valve)) {
+      openValve(valve);
     }
   }
 
@@ -47,12 +47,12 @@ class Actions {
     Action last1 = actions1.get(lastIndex);
     Action last2 = actions2.get(lastIndex);
 
-    if (last1 instanceof OpenAction openAction) {
-      closeValve(openAction.valve());
+    if (last1 instanceof OpenAction(Valve valve)) {
+      closeValve(valve);
     }
 
-    if (last2 instanceof OpenAction openAction) {
-      closeValve(openAction.valve());
+    if (last2 instanceof OpenAction(Valve valve)) {
+      closeValve(valve);
     }
 
     pressureReleased -= flowRate;

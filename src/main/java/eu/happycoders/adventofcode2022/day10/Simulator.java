@@ -26,8 +26,8 @@ class Simulator {
         screen.draw(screenOnSprite);
       }
 
-      if (operation instanceof AddX addX) {
-        registerX += addX.value();
+      if (operation instanceof AddX(int value)) {
+        registerX += value;
       }
     }
   }

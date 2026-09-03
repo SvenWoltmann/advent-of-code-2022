@@ -29,7 +29,7 @@ class InstructionExecutor {
   void execute(List<Instruction> instructions) {
     for (Instruction instruction : instructions) {
       switch (instruction) {
-        case GoForward goForward -> goForward(goForward.numberOfTiles());
+        case GoForward(int numberOfTiles) -> goForward(numberOfTiles);
         case TurnClockwise ignored -> turnClockwise();
         case TurnCounterClockwise ignored -> turnCounterClockwise();
         default -> throw new IllegalArgumentException();

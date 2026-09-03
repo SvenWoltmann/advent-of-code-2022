@@ -17,12 +17,10 @@ final class PacketList implements Packet {
 
   PacketList(Object... objects) {
     for (Object object : objects) {
-      if (object instanceof Packet packet) {
-        this.packets.add(packet);
-      } else if (object instanceof Integer value) {
-        this.packets.add(new PacketInteger(value));
-      } else {
-        throw new IllegalArgumentException("Invalid object: " + object);
+      switch (object) {
+        case Packet packet -> this.packets.add(packet);
+        case Integer value -> this.packets.add(new PacketInteger(value));
+        default -> throw new IllegalArgumentException("Invalid object: " + object);
       }
     }
   }
